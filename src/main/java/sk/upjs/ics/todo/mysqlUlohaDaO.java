@@ -11,16 +11,20 @@ import org.springframework.jdbc.core.RowMapper;
 public class mysqlUlohaDaO implements UlohaDao {
 
     JdbcTemplate temp;
-public class UlohaMapper implements RowMapper<Uloha>{
+
+    public class UlohaMapper implements RowMapper<Uloha> {
 
         @Override
         public Uloha mapRow(ResultSet rs, int i) throws SQLException {
             Uloha u = new Uloha();
-            u.setId(null);
-            u.setNazov(rs.getString(null));
+            u.setId(rs.getLong("id"));
+            u.setNazov(rs.getString("znenie"));
+            u.setDate(rs.getDate("date"));
+            return u;
         }
-    
-}
+
+    }
+
     public mysqlUlohaDaO() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL("jdbc:myslq://localhost/todo");
@@ -39,8 +43,8 @@ public class UlohaMapper implements RowMapper<Uloha>{
     @Override
     public List<Uloha> dajVsetky() {
         String sql = "select * from uloha";
-        BeanPropertyRowMapper<Uloha> mapper = BeanPropertyRowMapper.newInstance(Uloha.class);
-        return temp.query(sql, mapper);
+        //BeanPropertyRowMapper<Uloha> mapper = BeanPropertyRowMapper.newInstance(Uloha.class);
+        return temp.query(sql, new UlohaMapper());
     }
 
     @Override

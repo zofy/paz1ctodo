@@ -13,13 +13,18 @@ import java.util.List;
  * @author student
  */
 public class MainForm extends javax.swing.JFrame {
-    
+
     private mysqlUlohaDaO pamatovyUlohaDao = new mysqlUlohaDaO();
 
-   //prechod na databazu
+    //prechod na databazu
     public MainForm() {
         initComponents();
-        List<Uloha> ulohy = pamatovyUlohaDao.dajVsetky();        
+        List<Uloha> ulohy = pamatovyUlohaDao.dajVsetky();
+        ulohyList.setListData(ulohy.toArray());
+    }
+
+    public void refresh() {
+        List<Uloha> ulohy = pamatovyUlohaDao.dajVsetky();
         ulohyList.setListData(ulohy.toArray());
     }
 
@@ -102,15 +107,17 @@ public class MainForm extends javax.swing.JFrame {
         Uloha uloha = new Uloha();
         uloha.setNazov(ulohaTextField.getText());
         uloha.setDate(terminDatePicker.getDate());
-        
+
         pamatovyUlohaDao.pridat(uloha);
-        
+
         List<Uloha> ulohy = pamatovyUlohaDao.dajVsetky();
         ulohyList.setListData(ulohy.toArray());
     }//GEN-LAST:event_pridatButtonActionPerformed
 
     private void odstranitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odstranitButtonActionPerformed
-        
+        Uloha u = (Uloha) ulohyList.getSelectedValue();
+        pamatovyUlohaDao.vymaz(u);
+        this.refresh();
     }//GEN-LAST:event_odstranitButtonActionPerformed
 
     /**
