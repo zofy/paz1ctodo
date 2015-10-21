@@ -16,7 +16,7 @@ public class MainForm extends javax.swing.JFrame {
     
     private mysqlUlohaDaO pamatovyUlohaDao = new mysqlUlohaDaO();
 
-   
+   //prechod na databazu
     public MainForm() {
         initComponents();
         List<Uloha> ulohy = pamatovyUlohaDao.dajVsetky();        
