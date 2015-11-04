@@ -18,7 +18,7 @@ public class mysqlUlohaDaO implements UlohaDao {
         public Uloha mapRow(ResultSet rs, int i) throws SQLException {
             Uloha u = new Uloha();
             u.setId(rs.getLong("id"));
-            u.setNazov(rs.getString("znenie"));
+            u.setNazov(rs.getString("nazov"));
             u.setDate(rs.getDate("date"));
             return u;
         }
@@ -27,7 +27,7 @@ public class mysqlUlohaDaO implements UlohaDao {
 
     public mysqlUlohaDaO() {
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:myslq://localhost/todo");
+        dataSource.setURL("jdbc:mysql://localhost/todo");
         dataSource.setUser("todo");
         dataSource.setPassword("todo");
         temp = new JdbcTemplate(dataSource);
