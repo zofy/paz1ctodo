@@ -9,4 +9,6 @@ public interface UlohaDao {
     public List<Uloha> dajVsetky();
 
     public void vymaz(Uloha u);
+
+    //public boolean jeSplnena(Uloha u);
 }

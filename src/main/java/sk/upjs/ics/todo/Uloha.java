@@ -10,6 +10,16 @@ public class Uloha {
     
     private Date date;
     
+    private boolean splnena;
+
+    public void setSplnena(boolean splnena) {
+        this.splnena = splnena;
+    }
+
+    public boolean isSplnena() {
+        return splnena;
+    }
+    
     private SimpleDateFormat dateFormat = new SimpleDateFormat("d.M.yyyy");    
 
     public Long getId() {
@@ -40,6 +50,5 @@ public class Uloha {
     public String toString() {
         return this.nazov + " (termín " + dateFormat.format(this.date) + ")";
     }
-    
     
 }
