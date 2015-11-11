@@ -15,14 +15,15 @@ public class UlohaListCellRenderer extends DefaultListCellRenderer {
         Component comp = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus); //To change body of generated methods, choose Tools | Templates.
         Uloha u = (Uloha) value;
         if (jeSplnena(u) && !isSelected) {
-//            comp.setBackground(Color.green);
+            comp.setBackground(Color.green);
             comp.setForeground(Color.red);
+            //setOpaque(true);
         }
         return comp;
     }
 
     private boolean jeSplnena(Uloha u) {
-        return true;
+        return u.isSplnena();
     }
 
 }

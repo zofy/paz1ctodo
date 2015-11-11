@@ -12,6 +12,12 @@ public class mysqlUlohaDaO implements UlohaDao {
 
     JdbcTemplate temp;
 
+    @Override
+    public void upravit(Uloha u) {
+        temp.update("UPDATE uloha SET nazov = ?,date = ?,ulohacol = ?,splnena = ? WHERE id = ?",
+                u.getNazov(), u.getDate(), "njn", u.isSplnena(), u.getId());
+    }
+
     public class UlohaMapper implements RowMapper<Uloha> {
 
         @Override
@@ -20,6 +26,7 @@ public class mysqlUlohaDaO implements UlohaDao {
             u.setId(rs.getLong("id"));
             u.setNazov(rs.getString("nazov"));
             u.setDate(rs.getDate("date"));
+            u.setSplnena(rs.getBoolean("splnena"));
             return u;
         }
 
@@ -37,7 +44,7 @@ public class mysqlUlohaDaO implements UlohaDao {
     @Override
     public void pridat(Uloha uloha) {
         String sql = "insert into uloha values(?,?,?,?,?)";
-        temp.update(sql, null, uloha.getNazov(), uloha.getDate(), "fgehr",uloha.isSplnena());
+        temp.update(sql, null, uloha.getNazov(), uloha.getDate(), "fgehr", uloha.isSplnena());
     }
 
     @Override
