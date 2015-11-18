@@ -9,7 +9,7 @@ public enum UlohaDaOFactory {
         if ("db".equals(profil)) {
             return new mysqlUlohaDaO();
         } else {
-            return new PamatovyUlohaDao();
+            return new mysqlUlohaDaO();
         }
     }
 }

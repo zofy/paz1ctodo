@@ -1,18 +1,33 @@
 package sk.upjs.ics.todo;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class MainForm extends javax.swing.JFrame {
 
     private UlohaDao ulohaDaO = UlohaDaOFactory.INSTANCE.getUlohaDao();
+    private JFrame frame = this;
 
     //prechod na databazu
     public MainForm() {
         initComponents();
         ulohyList.setCellRenderer(new UlohaListCellRenderer());
         this.refresh();
+        ulohyList.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    frame.setVisible(false);
+                    new UlohaForm(frame, true, (Uloha) ulohyList.getSelectedValue()).setVisible(true);
+                }
+            }
+
+        });
     }
 
     public void refresh() {
@@ -35,6 +50,11 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ulohyList.setCellRenderer(new UlohaListCellRenderer());
+        ulohyList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ulohyListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(ulohyList);
 
         pridatButton.setText("Pridať");
@@ -137,6 +157,10 @@ public class MainForm extends javax.swing.JFrame {
             ulohaDaO.upravit(vybranaU);
         }
     }//GEN-LAST:event_hotovoButtonActionPerformed
+
+    private void ulohyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ulohyListMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ulohyListMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
