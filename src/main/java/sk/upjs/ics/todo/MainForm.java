@@ -10,11 +10,12 @@ import javax.swing.JOptionPane;
 public class MainForm extends javax.swing.JFrame {
 
     private UlohaDao ulohaDaO = UlohaDaOFactory.INSTANCE.getUlohaDao();
-    private JFrame frame = this;
+    private JFrame frame;
 
     //prechod na databazu
     public MainForm() {
         initComponents();
+        frame = this;
         ulohyList.setCellRenderer(new UlohaListCellRenderer());
         this.refresh();
         ulohyList.addMouseListener(new MouseAdapter() {
@@ -22,7 +23,7 @@ public class MainForm extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    frame.setVisible(false);
+                    frame.dispose();
                     new UlohaForm(frame, true, (Uloha) ulohyList.getSelectedValue()).setVisible(true);
                 }
             }

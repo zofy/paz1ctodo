@@ -3,17 +3,17 @@ package sk.upjs.ics.todo;
 import javax.swing.JFrame;
 
 public class UlohaForm extends javax.swing.JDialog {
-
+    
     private Uloha uloha;
     private UlohaDao ulohy;
     private JFrame parent;
-
+    
     public UlohaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Zmena ulohy");
     }
-
+    
     public UlohaForm(JFrame parent, boolean modal, Uloha uloha) {
         super(parent, modal);
         initComponents();
@@ -111,8 +111,9 @@ public class UlohaForm extends javax.swing.JDialog {
         uloha.setDate(terminDatePicker.getDate());
         uloha.setSplnena(splnenaCheckBox.isSelected());
         ulohy.upravit(uloha);
-        parent.setVisible(true);
-        
+        MainForm m = new MainForm();
+        m.refresh();
+        m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
